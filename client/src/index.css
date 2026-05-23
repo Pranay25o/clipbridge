@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #00ff9d;
+  --brand-dim: #00cc7a;
+  --bg-deep: #05050a;
+  --bg-card: #0d0d1a;
+  --bg-card-hover: #12122a;
+  --border: #1a1a35;
+  --border-bright: #00ff9d30;
+  --text-muted: #5a5a8a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Sora', system-ui, sans-serif;
+  background: var(--bg-deep);
+  color: #e0e0f0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-card); }
+::-webkit-scrollbar-thumb { background: #2a2a50; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a70; }
+
+/* Selection */
+::selection { background: #00ff9d30; color: #00ff9d; }
+
+/* Custom scrollbar for Firefox */
+* { scrollbar-width: thin; scrollbar-color: #2a2a50 var(--bg-card); }
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+/* Glow effects */
+.glow-brand {
+  box-shadow: 0 0 20px #00ff9d30, 0 0 40px #00ff9d10;
+}
+
+.glow-brand-text {
+  text-shadow: 0 0 20px #00ff9d80;
+}
+
+/* Grid background */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Card styles */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.card:hover {
+  border-color: var(--border-bright);
+}
+
+/* Input styles */
+.input-field {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #e0e0f0;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'Sora', system-ui, sans-serif;
+}
+
+.input-field:focus {
+  border-color: #00ff9d60;
+  box-shadow: 0 0 0 3px #00ff9d15;
+}
+
+/* Button base */
+.btn-primary {
+  background: var(--brand);
+  color: #050508;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Sora', system-ui, sans-serif;
+}
+
+.btn-primary:hover {
+  background: #00e88a;
+  box-shadow: 0 0 20px #00ff9d40;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Sora', system-ui, sans-serif;
+}
+
+.btn-ghost:hover {
+  border-color: #00ff9d40;
+  color: #e0e0f0;
+}
+
+/* Message bubbles */
+.msg-self {
+  background: linear-gradient(135deg, #00ff9d18, #00ff9d08);
+  border: 1px solid #00ff9d30;
+}
+
+.msg-other {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
+}
+
+/* File chip */
+.file-chip {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.file-chip:hover {
+  border-color: #00ff9d40;
+}
+
+/* Typing indicator */
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+.typing-dot {
+  animation: typingBounce 1.2s ease infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Drag overlay */
+.drag-overlay {
+  background: rgba(0, 255, 157, 0.05);
+  border: 2px dashed #00ff9d;
+  border-radius: 12px;
+}
+
+/* Timer urgent */
+@keyframes urgentPulse {
+  0%, 100% { color: #ff4444; }
+  50% { color: #ff8888; }
+}
+
+.timer-urgent {
+  animation: urgentPulse 1s ease infinite;
+}
+
+/* Syntax highlight override */
+pre { border-radius: 8px !important; margin: 0 !important; }
